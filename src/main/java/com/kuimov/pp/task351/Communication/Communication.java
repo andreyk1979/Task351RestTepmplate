@@ -14,24 +14,24 @@ import static java.lang.String.join;
 
 @Component
 public class Communication {
+
     static final String URL = "http://94.198.50.185:7081/api/users";
     static private List<String> cookie;
-
-    @Autowired
-    RestTemplate restTemplate;
+    final RestTemplate restTemplate;
     HttpHeaders headers = new HttpHeaders();
 
+    @Autowired
     public Communication(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     public List<User> getUsers() {
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        // Request to return JSON format
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        // HttpEntity<List<User>>: To get result as List<User>.
-        HttpEntity<List<User>> entity = new HttpEntity<List<User>>(headers);
-        // Send request with GET method, and Headers.
+//        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+//        // Request to return JSON format
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        // HttpEntity<List<User>>: To get result as List<User>.
+//        HttpEntity<List<User>> entity = new HttpEntity<List<User>>(headers);
+//        // Send request with GET method, and Headers.
         ResponseEntity<List<User>> response = restTemplate.exchange(URL, HttpMethod.GET, null, new ParameterizedTypeReference<List<User>>() {
         });
         HttpStatus statusCode = response.getStatusCode();
